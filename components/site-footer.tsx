@@ -14,8 +14,8 @@ export function SiteFooter() {
             </a>
           </p>
           <p className="max-w-xl text-xs text-muted-foreground">
-            Independent product. Not affiliated with Google, Gemini, or OpenRouter. We provide an interface that routes
-            requests to third-party AI models.
+            Independent product. Not affiliated with Google, Gemini, OpenAI/ChatGPT, or OpenRouter. We provide an
+            interface that routes requests to third-party AI models.
           </p>
         </div>
 
@@ -37,4 +37,3 @@ export function SiteFooter() {
     </footer>
   )
 }
-
