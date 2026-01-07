@@ -1,67 +1,67 @@
 'use client'
 
-import { motion } from 'framer-motion'
-import { useReducedMotion } from '@/hooks/use-reduced-motion'
+import type React from "react"
+import { motion } from "framer-motion"
+import { Image as ImageIcon, Layers, MessageSquareText, Sparkles, Users, Zap } from "lucide-react"
+import { useReducedMotion } from "@/hooks/use-reduced-motion"
+
+type Feature = {
+  title: string
+  description: string
+  icon: React.ComponentType<{ className?: string }>
+}
 
 export function Features() {
   const prefersReducedMotion = useReducedMotion()
 
-  const features = [
+  const features: Feature[] = [
     {
       title: "Natural Language Editing",
-      description:
-        "Edit images using simple text prompts. Nano-banana AI understands complex instructions like GPT for images",
-      icon: "💬",
+      description: "Describe the change in text and generate a new result.",
+      icon: MessageSquareText,
     },
     {
-      title: "Character Consistency",
-      description:
-        "Maintain perfect character details across edits. This model excels at preserving faces and identities",
-      icon: "👤",
+      title: "Identity-aware edits",
+      description: "Designed for edits where key details matter across iterations.",
+      icon: Users,
     },
     {
-      title: "Scene Preservation",
-      description: "Seamlessly blend edits with original backgrounds. Superior scene fusion compared to Flux Kontext",
-      icon: "🎨",
+      title: "Scene preservation",
+      description: "Keep the original scene while making targeted changes.",
+      icon: Layers,
     },
     {
-      title: "One-Shot Editing",
-      description:
-        "Perfect results in a single attempt. Nano-banana solves one-shot image editing challenges effortlessly",
-      icon: "⚡",
+      title: "Fast iteration",
+      description: "Upload, prompt, generate, refine.",
+      icon: Zap,
     },
     {
-      title: "Multi-Image Context",
-      description: "Process multiple images simultaneously. Support for advanced multi-image editing workflows",
-      icon: "🖼️",
+      title: "Image + prompt input",
+      description: "Bring an input image and a prompt together for guided edits.",
+      icon: ImageIcon,
     },
     {
-      title: "AI UGC Creation",
-      description: "Create consistent AI influencers and UGC content. Perfect for social media and marketing campaigns",
-      icon: "🎬",
+      title: "Creator workflows",
+      description: "Useful for content creation, product shots, and creative exploration.",
+      icon: Sparkles,
     },
   ]
 
   return (
-    <section 
-      id="features"
-      className="bg-muted/30 px-4 py-16 sm:px-6 sm:py-24"
-      aria-label="Core features"
-    >
+    <section id="features" className="bg-muted/30 px-4 py-16 sm:px-6 sm:py-24" aria-label="Core features">
       <div className="mx-auto max-w-7xl">
         <div className="mb-12 text-center sm:mb-16">
           <h2 className="mb-3 sm:mb-4">Core Features</h2>
-          <p className="text-base sm:text-lg font-medium">Why Choose Nano Banana?</p>
+          <p className="text-base sm:text-lg font-medium">A simple editor UI</p>
           <p className="text-sm sm:text-base text-muted-foreground px-4">
-            Nano-banana is the most advanced AI image editor on LMArena. Revolutionize your photo editing with natural
-            language understanding
+            We provide an interface to third-party image models via OpenRouter, with tiered access by plan.
           </p>
         </div>
 
         <div className="grid gap-6 sm:gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {features.map((feature, index) => (
             <motion.div
-              key={index}
+              key={feature.title}
               initial={prefersReducedMotion ? {} : { opacity: 0, y: 20 }}
               whileInView={prefersReducedMotion ? {} : { opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
@@ -69,7 +69,9 @@ export function Features() {
               whileHover={prefersReducedMotion ? {} : { y: -8, transition: { duration: 0.2 } }}
               className="rounded-lg border bg-card p-4 sm:p-6 transition-shadow hover:shadow-xl"
             >
-              <div className="mb-3 text-3xl sm:text-4xl sm:mb-4">{feature.icon}</div>
+              <div className="mb-3 sm:mb-4">
+                <feature.icon className="h-8 w-8 text-primary" />
+              </div>
               <h3 className="mb-2 text-lg sm:text-xl font-semibold">{feature.title}</h3>
               <p className="text-sm sm:text-base text-muted-foreground">{feature.description}</p>
             </motion.div>

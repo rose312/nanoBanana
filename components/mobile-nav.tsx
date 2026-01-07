@@ -1,44 +1,44 @@
 'use client'
 
-import { useState } from 'react'
-import Link from 'next/link'
-import { motion, AnimatePresence } from 'framer-motion'
-import { Button } from '@/components/ui/button'
-import { useReducedMotion } from '@/hooks/use-reduced-motion'
-import { Menu, X } from 'lucide-react'
+import { useState } from "react"
+import Link from "next/link"
+import { motion, AnimatePresence } from "framer-motion"
+import { Button } from "@/components/ui/button"
+import { useReducedMotion } from "@/hooks/use-reduced-motion"
+import { Menu, X } from "lucide-react"
 
 export function MobileNav() {
   const [isOpen, setIsOpen] = useState(false)
   const prefersReducedMotion = useReducedMotion()
 
   const menuItems = [
-    { href: '#generator', label: 'Try Editor' },
-    { href: '#features', label: 'Features' },
-    { href: '#showcase', label: 'Showcase' },
-    { href: '#faq', label: 'FAQ' },
-    { href: '/pricing', label: 'Pricing' },
+    { href: "#generator", label: "Try Editor" },
+    { href: "#features", label: "Features" },
+    { href: "#showcase", label: "Showcase" },
+    { href: "#faq", label: "FAQ" },
+    { href: "/pricing", label: "Pricing" },
+    { href: "/support", label: "Support" },
+    { href: "/privacy", label: "Privacy" },
+    { href: "/terms", label: "Terms" },
   ]
 
   return (
     <>
-      {/* Mobile Menu Button */}
       <div className="fixed top-4 right-4 z-50 md:hidden">
         <Button
           variant="outline"
           size="icon"
           onClick={() => setIsOpen(!isOpen)}
           className="tap-target bg-background/80 backdrop-blur-md shadow-lg"
-          aria-label={isOpen ? 'Close menu' : 'Open menu'}
+          aria-label={isOpen ? "Close menu" : "Open menu"}
         >
           {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
         </Button>
       </div>
 
-      {/* Mobile Menu Overlay */}
       <AnimatePresence>
         {isOpen && (
           <>
-            {/* Backdrop */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -48,12 +48,11 @@ export function MobileNav() {
               onClick={() => setIsOpen(false)}
             />
 
-            {/* Menu Panel */}
             <motion.div
-              initial={prefersReducedMotion ? {} : { x: '100%' }}
+              initial={prefersReducedMotion ? {} : { x: "100%" }}
               animate={prefersReducedMotion ? {} : { x: 0 }}
-              exit={prefersReducedMotion ? {} : { x: '100%' }}
-              transition={{ type: 'spring', damping: 30, stiffness: 300 }}
+              exit={prefersReducedMotion ? {} : { x: "100%" }}
+              transition={{ type: "spring", damping: 30, stiffness: 300 }}
               className="fixed right-0 top-0 bottom-0 z-40 w-64 bg-card border-l shadow-2xl md:hidden safe-top safe-bottom"
             >
               <nav className="flex flex-col h-full p-6 pt-20">
@@ -77,11 +76,7 @@ export function MobileNav() {
                 </div>
 
                 <div className="pt-6 border-t">
-                  <Button
-                    className="w-full tap-target"
-                    size="lg"
-                    asChild
-                  >
+                  <Button className="w-full tap-target" size="lg" asChild>
                     <Link href="#generator" onClick={() => setIsOpen(false)}>
                       Get Started
                     </Link>
@@ -95,3 +90,4 @@ export function MobileNav() {
     </>
   )
 }
+

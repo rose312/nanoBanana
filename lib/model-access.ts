@@ -35,19 +35,19 @@ export function getModelCatalog(): ModelOption[] {
   return [
     {
       key: "nano_banana",
-      label: "Nano Banana (Gemini 2.5 Flash Image)",
+      label: "Standard (Gemini 2.5 Flash Image)",
       model: nanoBananaModel,
       minTier: "pro",
     },
     {
       key: "nano_banana_pro",
-      label: "Nano Banana Pro (higher tier)",
+      label: "Pro (higher tier model)",
       model: nanoBananaProModel,
       minTier: "team",
     },
     {
       key: "nano_banana_plus",
-      label: "Nano Banana Plus (highest tier)",
+      label: "Plus (highest tier model)",
       model: nanoBananaPlusModel,
       minTier: "plus",
     },

@@ -13,6 +13,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { createSupabaseBrowserClient } from "@/lib/supabase/client"
 import { canUseModel, defaultModelKeyForTier, getModelCatalog, tierFromPlanKey, type ModelKey, type PlanTier } from "@/lib/model-access"
 import { Loader2, Upload } from "lucide-react"
+import { siteConfig } from "@/lib/site-config"
 
 function clampNumber(value: number, min: number, max: number): number {
   return Math.max(min, Math.min(max, value))
@@ -410,8 +411,17 @@ export function Generator() {
           <h2 className="mb-3 sm:mb-4">Get Started</h2>
           <p className="text-base sm:text-lg text-muted-foreground">Try The AI Editor</p>
           <p className="text-sm sm:text-base text-muted-foreground px-4">
-            Experience the power of nano-banana's natural language image editing. Transform any photo with simple text
-            commands
+            Upload an image, write a prompt, and generate an edited result.
+          </p>
+          <p className="mt-3 text-xs text-muted-foreground">
+            Need help?{" "}
+            <a className="underline underline-offset-2" href={`mailto:${siteConfig.supportEmail}`}>
+              {siteConfig.supportEmail}
+            </a>{" "}
+            ·{" "}
+            <Link className="underline underline-offset-2" href="/support">
+              Support
+            </Link>
           </p>
         </div>
 
@@ -741,7 +751,7 @@ export function Generator() {
                   <div className="flex flex-wrap gap-2">
                     <a
                       href={resultImages[0]}
-                      download={`nano-banana-${Date.now()}.jpg`}
+                      download={`banana-studio-${Date.now()}.jpg`}
                       className="inline-flex h-9 items-center justify-center rounded-md bg-primary px-4 text-sm font-medium text-primary-foreground shadow hover:bg-primary/90"
                     >
                       Download

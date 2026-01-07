@@ -21,7 +21,7 @@ export function MobileImageViewer({ src, alt, isOpen, onClose }: MobileImageView
   const handleDownload = () => {
     const link = document.createElement('a')
     link.href = src
-    link.download = `nano-banana-${Date.now()}.jpg`
+    link.download = `banana-studio-${Date.now()}.jpg`
     link.click()
   }
 

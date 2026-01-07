@@ -1,25 +1,25 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-import Link from 'next/link'
-import { motion } from 'framer-motion'
-import { Home, Sparkles, Image, HelpCircle, CreditCard } from 'lucide-react'
-import { cn } from '@/lib/utils'
+import { useState, useEffect } from "react"
+import Link from "next/link"
+import { motion } from "framer-motion"
+import { Home, Sparkles, Image, LifeBuoy, CreditCard } from "lucide-react"
+import { cn } from "@/lib/utils"
 
 export function MobileBottomNav() {
-  const [activeSection, setActiveSection] = useState('hero')
+  const [activeSection, setActiveSection] = useState("hero")
 
   const navItems = [
-    { id: 'hero', icon: Home, label: 'Home', href: '#' },
-    { id: 'generator', icon: Sparkles, label: 'Editor', href: '#generator' },
-    { id: 'showcase', icon: Image, label: 'Gallery', href: '#showcase' },
-    { id: 'faq', icon: HelpCircle, label: 'FAQ', href: '#faq' },
-    { id: 'pricing', icon: CreditCard, label: 'Pricing', href: '/pricing' },
+    { id: "hero", icon: Home, label: "Home", href: "#" },
+    { id: "generator", icon: Sparkles, label: "Editor", href: "#generator" },
+    { id: "showcase", icon: Image, label: "Gallery", href: "#showcase" },
+    { id: "support", icon: LifeBuoy, label: "Support", href: "/support" },
+    { id: "pricing", icon: CreditCard, label: "Pricing", href: "/pricing" },
   ]
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['hero', 'generator', 'features', 'showcase', 'faq']
+      const sections = ["hero", "generator", "features", "showcase", "faq"]
       const scrollPosition = window.scrollY + window.innerHeight / 2
 
       for (const section of sections) {
@@ -34,8 +34,8 @@ export function MobileBottomNav() {
       }
     }
 
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
   return (
@@ -51,18 +51,18 @@ export function MobileBottomNav() {
                 key={item.id}
                 href={item.href}
                 className={cn(
-                  'relative flex flex-col items-center justify-center gap-1 px-3 py-2 rounded-lg transition-colors tap-target',
-                  isActive ? 'text-primary' : 'text-muted-foreground'
+                  "relative flex flex-col items-center justify-center gap-1 px-3 py-2 rounded-lg transition-colors tap-target",
+                  isActive ? "text-primary" : "text-muted-foreground",
                 )}
               >
                 {isActive && (
                   <motion.div
                     layoutId="activeTab"
                     className="absolute inset-0 bg-primary/10 rounded-lg"
-                    transition={{ type: 'spring', duration: 0.5 }}
+                    transition={{ type: "spring", duration: 0.5 }}
                   />
                 )}
-                <Icon className={cn('h-5 w-5 relative z-10', isActive && 'scale-110')} />
+                <Icon className={cn("h-5 w-5 relative z-10", isActive && "scale-110")} />
                 <span className="text-xs font-medium relative z-10">{item.label}</span>
               </Link>
             )
@@ -72,3 +72,4 @@ export function MobileBottomNav() {
     </nav>
   )
 }
+

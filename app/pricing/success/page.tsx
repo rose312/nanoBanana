@@ -1,4 +1,5 @@
 import Link from "next/link"
+import { siteConfig } from "@/lib/site-config"
 
 export default async function PricingSuccessPage({
   searchParams,
@@ -14,6 +15,13 @@ export default async function PricingSuccessPage({
         <h1 className="text-3xl font-bold">Payment successful</h1>
         <p className="mt-2 text-sm text-muted-foreground">
           Thanks! If your plan doesn’t update immediately, it may take a moment for the webhook to arrive.
+        </p>
+        <p className="mt-2 text-sm text-muted-foreground">
+          Need help?{" "}
+          <a className="underline underline-offset-2" href={`mailto:${siteConfig.supportEmail}`}>
+            {siteConfig.supportEmail}
+          </a>
+          .
         </p>
         {plan ? (
           <p className="mt-4 text-sm">
@@ -39,4 +47,3 @@ export default async function PricingSuccessPage({
     </main>
   )
 }
-

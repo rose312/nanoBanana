@@ -36,7 +36,7 @@ export async function POST(req: Request) {
     const origin = new URL(req.url).origin
     const successUrl = `${origin}/pricing/success?plan=${encodeURIComponent(plan)}`
 
-    const requestId = `nanoBanana_${user.id}_${Date.now()}`
+    const requestId = `bananaStudio_${user.id}_${Date.now()}`
 
     const { error: insertError } = await supabase.from("billing_checkouts").insert({
       request_id: requestId,

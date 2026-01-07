@@ -1,53 +1,49 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { motion } from "framer-motion"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
-import { useReducedMotion } from '@/hooks/use-reduced-motion'
+import { useReducedMotion } from "@/hooks/use-reduced-motion"
+import { siteConfig } from "@/lib/site-config"
 
 export function FAQ() {
   const prefersReducedMotion = useReducedMotion()
 
   const faqs = [
     {
-      question: "What is Nano Banana?",
+      question: "What is this site?",
       answer:
-        "It's a revolutionary AI image editing model that transforms photos using natural language prompts. This is currently the most powerful image editing model available, with exceptional consistency. It offers superior performance compared to Flux Kontext for consistent character editing and scene preservation.",
+        "This is an independent web app that lets you upload an image, write a prompt, and generate an edited result. Requests are routed to third-party image models via OpenRouter.",
     },
     {
       question: "How does it work?",
       answer:
-        'Simply upload an image and describe your desired edits in natural language. The AI understands complex instructions like "place the creature in a snowy mountain" or "imagine the whole face and create it". It processes your text prompt and generates perfectly edited images.',
+        "Upload an image, write what you want changed, then click Generate. The model returns one or more images which we display in the output gallery.",
     },
     {
-      question: "How is it better than Flux Kontext?",
+      question: "What plans unlock which models?",
       answer:
-        'This model excels in character consistency, scene blending, and one-shot editing. Users report it "completely destroys" Flux Kontext in preserving facial features and seamlessly integrating edits with backgrounds. It also supports multi-image context, making it ideal for creating consistent AI influencers.',
+        "Plans are tiered. Pro unlocks Standard; Team unlocks Standard + Pro; Plus unlocks Standard + Pro + Plus. See the Pricing page for details.",
     },
     {
-      question: "Can I use it for commercial projects?",
+      question: "Can I cancel anytime?",
       answer:
-        "Yes! It's perfect for creating AI UGC content, social media campaigns, and marketing materials. Many users leverage it for creating consistent AI influencers and product photography. The high-quality outputs are suitable for professional use.",
+        "Yes. You can cancel through the Customer Portal from the Pricing page. Your plan stays active until the end of the billing period.",
     },
     {
-      question: "What types of edits can it handle?",
+      question: "Do you store my images?",
       answer:
-        'The editor handles complex edits including face completion, background changes, object placement, style transfers, and character modifications. It excels at understanding contextual instructions like "place in a blizzard" or "create the whole face" while maintaining photorealistic quality.',
+        "We do not intentionally store uploaded images. Images and prompts are sent to generation providers to produce outputs. See the Privacy Policy for details.",
     },
     {
-      question: "Where can I try Nano Banana?",
-      answer:
-        "You can try nano-banana on LMArena or through our web interface. Simply upload your image, enter a text prompt describing your desired edits, and watch as nano-banana AI transforms your photo with incredible accuracy and consistency.",
+      question: "How do I contact support?",
+      answer: `Email ${siteConfig.supportEmail}.`,
     },
   ]
 
   return (
-    <section 
-      id="faq" 
-      className="px-4 py-16 sm:px-6 sm:py-24"
-      aria-label="Frequently asked questions"
-    >
+    <section id="faq" className="px-4 py-16 sm:px-6 sm:py-24" aria-label="Frequently asked questions">
       <div className="mx-auto max-w-3xl">
-        <motion.div 
+        <motion.div
           className="mb-12 text-center sm:mb-16"
           initial={prefersReducedMotion ? {} : { opacity: 0, y: 20 }}
           whileInView={prefersReducedMotion ? {} : { opacity: 1, y: 0 }}
@@ -66,7 +62,7 @@ export function FAQ() {
         >
           <Accordion type="single" collapsible className="w-full">
             {faqs.map((faq, index) => (
-              <AccordionItem key={index} value={`item-${index}`}>
+              <AccordionItem key={faq.question} value={`item-${index}`}>
                 <AccordionTrigger className="text-left text-sm sm:text-base">{faq.question}</AccordionTrigger>
                 <AccordionContent className="text-sm sm:text-base text-muted-foreground">{faq.answer}</AccordionContent>
               </AccordionItem>
@@ -77,3 +73,4 @@ export function FAQ() {
     </section>
   )
 }
+

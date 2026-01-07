@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react"
 import { motion } from "framer-motion"
+import Link from "next/link"
 import { Card } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
@@ -10,6 +11,7 @@ import { useReducedMotion } from "@/hooks/use-reduced-motion"
 import type { PricingPlanKey } from "@/lib/creem"
 import type { PlanTier } from "@/lib/model-access"
 import { tierFromPlanKey } from "@/lib/model-access"
+import { siteConfig } from "@/lib/site-config"
 
 type Billing = "monthly" | "yearly"
 
@@ -38,7 +40,7 @@ export function PricingPlans({ isAuthed, currentPlanKey }: { isAuthed: boolean; 
         tier: "pro",
         priceMonthly: 19,
         priceYearly: 190,
-        features: ["Model: Nano Banana", "Fast image editing", "High-quality outputs", "Commercial use"],
+        features: ["Model: Standard (Gemini 2.5 Flash Image)", "Text-guided image editing", "Commercial use", "Cancel anytime"],
         planKeyByBilling: { monthly: "pro_monthly", yearly: "pro_yearly" },
       },
       {
@@ -47,7 +49,7 @@ export function PricingPlans({ isAuthed, currentPlanKey }: { isAuthed: boolean; 
         tier: "team",
         priceMonthly: 49,
         priceYearly: 490,
-        features: ["Models: Nano Banana + Nano Banana Pro", "Everything in Pro", "Higher limits", "Team billing"],
+        features: ["Models: Standard + Pro", "Everything in Pro", "Higher limits", "Team billing"],
         planKeyByBilling: { monthly: "team_monthly", yearly: "team_yearly" },
       },
       {
@@ -56,7 +58,7 @@ export function PricingPlans({ isAuthed, currentPlanKey }: { isAuthed: boolean; 
         tier: "plus",
         priceMonthly: 99,
         priceYearly: 990,
-        features: ["Models: Nano Banana + Pro + Plus", "Highest quality outputs", "Highest limits", "Priority support"],
+        features: ["Models: Standard + Pro + Plus", "Highest quality outputs", "Highest limits", "Priority support"],
         planKeyByBilling: { monthly: "plus_monthly", yearly: "plus_yearly" },
       },
     ],
@@ -173,7 +175,19 @@ export function PricingPlans({ isAuthed, currentPlanKey }: { isAuthed: boolean; 
       </div>
 
       <p className="mt-6 text-center text-xs text-muted-foreground">
-        Note: You must configure Creem Product IDs in `.env.local` for checkout to work.
+        Prices shown in USD. Cancel anytime. By subscribing you agree to our{" "}
+        <Link className="underline underline-offset-2" href="/terms">
+          Terms
+        </Link>{" "}
+        and{" "}
+        <Link className="underline underline-offset-2" href="/privacy">
+          Privacy Policy
+        </Link>
+        . Need help?{" "}
+        <a className="underline underline-offset-2" href={`mailto:${siteConfig.supportEmail}`}>
+          {siteConfig.supportEmail}
+        </a>
+        .
       </p>
     </div>
   )

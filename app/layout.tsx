@@ -2,6 +2,8 @@ import type React from "react"
 import type { Metadata } from "next"
 import { Geist, Geist_Mono } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
+import { SiteFooter } from "@/components/site-footer"
+import { SiteHeader } from "@/components/site-header"
 import "./globals.css"
 
 const geist = Geist({ 
@@ -17,9 +19,9 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  title: "Nano Banana - AI Image Editor | Edit Photos with Text",
+  title: "Banana Studio - AI Image Editor",
   description:
-    "Transform any image with simple text prompts. Nano-banana's advanced model delivers consistent character editing and scene preservation. Experience the future of AI image editing.",
+    "Edit images with text prompts. Banana Studio provides an interface to third-party image models via OpenRouter.",
   generator: "v0.app",
   icons: {
     icon: [
@@ -56,7 +58,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${geist.variable} ${geistMono.variable}`}>
       <body className="font-sans antialiased">
+        <SiteHeader />
         {children}
+        <SiteFooter />
         <Analytics />
       </body>
     </html>

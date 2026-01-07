@@ -6,20 +6,15 @@ import { Button } from "@/components/ui/button"
 import { AuthButton } from "@/components/auth-button"
 import { animations, staggerChildren } from "@/lib/animations"
 import { useReducedMotion } from "@/hooks/use-reduced-motion"
+import { siteConfig } from "@/lib/site-config"
 
 export function Hero() {
   const prefersReducedMotion = useReducedMotion()
 
   return (
-    <section 
-      id="hero"
-      className="relative overflow-hidden px-6 py-24 sm:py-32"
-      aria-label="Hero section"
-    >
-      {/* Animated gradient background */}
+    <section id="hero" className="relative overflow-hidden px-6 py-24 sm:py-32" aria-label="Hero section">
       <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-accent/5 to-background animate-gradient" />
-      
-      {/* Floating banana decorations */}
+
       <motion.div
         className="absolute -right-12 top-12 h-32 w-32 rotate-12 opacity-10"
         animate={prefersReducedMotion ? {} : animations.float.animate}
@@ -28,73 +23,61 @@ export function Hero() {
       </motion.div>
       <motion.div
         className="absolute -left-12 bottom-12 h-24 w-24 -rotate-12 opacity-10"
-        animate={prefersReducedMotion ? {} : {
-          y: [10, -10, 10],
-          transition: {
-            duration: 5,
-            repeat: Infinity,
-            ease: "easeInOut",
-          },
-        }}
+        animate={
+          prefersReducedMotion
+            ? {}
+            : {
+                y: [10, -10, 10],
+                transition: {
+                  duration: 5,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                },
+              }
+        }
       >
         <BananaIcon className="h-full w-full" />
       </motion.div>
 
-      <motion.div 
+      <motion.div
         className="relative mx-auto max-w-4xl text-center"
         initial={prefersReducedMotion ? {} : { opacity: 0 }}
         animate={prefersReducedMotion ? {} : { opacity: 1 }}
         transition={prefersReducedMotion ? {} : { ...staggerChildren(0.1), duration: 0.6 }}
       >
-        {/* Announcement banner */}
         <motion.div
-          initial={prefersReducedMotion ? {} : animations.slideDown.initial}
-          animate={prefersReducedMotion ? {} : animations.slideDown.animate}
-          transition={prefersReducedMotion ? {} : { delay: 0.1 }}
-        >
-          <Link
-            href="#generator"
-            className="mb-8 inline-flex items-center gap-2 rounded-full bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-all hover:scale-105 hover:shadow-lg"
-          >
-            <span className="text-lg">🍌</span>
-            <span>Nano Banana Pro is now live</span>
-            <span>Try it now</span>
-          </Link>
-        </motion.div>
-
-        <motion.div 
           className="mb-6 flex items-center justify-center gap-2 text-sm text-muted-foreground"
           initial={prefersReducedMotion ? {} : animations.fadeIn.initial}
           animate={prefersReducedMotion ? {} : animations.fadeIn.animate}
           transition={prefersReducedMotion ? {} : { delay: 0.2 }}
         >
-          <span className="text-2xl">🍌</span>
-          <span>The AI model that outperforms Flux Kontext</span>
-          <Link href="#generator" className="text-foreground underline hover:text-primary transition-colors">
-            Try Now →
+          <span>Text-guided image editing</span>
+          <span className="text-muted-foreground/60">·</span>
+          <Link href="/pricing" className="text-foreground underline hover:text-primary transition-colors">
+            View pricing
           </Link>
         </motion.div>
 
-        <motion.h1 
+        <motion.h1
           className="mb-6 text-balance font-bold tracking-tight bg-gradient-to-br from-foreground to-foreground/70 bg-clip-text"
           initial={prefersReducedMotion ? {} : animations.slideUp.initial}
           animate={prefersReducedMotion ? {} : animations.slideUp.animate}
           transition={prefersReducedMotion ? {} : { delay: 0.3 }}
         >
-          Nano Banana
+          {siteConfig.name}
         </motion.h1>
 
-        <motion.p 
+        <motion.p
           className="mb-8 text-pretty text-muted-foreground max-w-3xl mx-auto"
           initial={prefersReducedMotion ? {} : animations.fadeIn.initial}
           animate={prefersReducedMotion ? {} : animations.fadeIn.animate}
           transition={prefersReducedMotion ? {} : { delay: 0.4 }}
         >
-          Transform any image with simple text prompts. Nano-banana's advanced model delivers consistent character
-          editing and scene preservation that surpasses Flux Kontext. Experience the future of AI image editing.
+          Upload an image, describe what you want, and generate an edited result. We provide an interface that routes
+          requests to third-party image models (for example, Google Gemini) via OpenRouter.
         </motion.p>
 
-        <motion.div 
+        <motion.div
           className="flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4"
           initial={prefersReducedMotion ? {} : animations.scaleIn.initial}
           animate={prefersReducedMotion ? {} : animations.scaleIn.animate}
@@ -114,7 +97,7 @@ export function Hero() {
           </Button>
         </motion.div>
 
-        <motion.div 
+        <motion.div
           className="mt-6"
           initial={prefersReducedMotion ? {} : animations.fadeIn.initial}
           animate={prefersReducedMotion ? {} : animations.fadeIn.animate}
@@ -123,45 +106,48 @@ export function Hero() {
           <AuthButton />
         </motion.div>
 
-        <motion.div 
+        <motion.div
           className="mt-8 flex flex-wrap items-center justify-center gap-6 text-sm text-muted-foreground"
           initial={prefersReducedMotion ? {} : animations.fadeIn.initial}
           animate={prefersReducedMotion ? {} : animations.fadeIn.animate}
           transition={prefersReducedMotion ? {} : { delay: 0.7 }}
         >
           <div className="flex items-center gap-2">
-            <svg className="h-5 w-5 text-primary" fill="currentColor" viewBox="0 0 20 20">
-              <path
-                fillRule="evenodd"
-                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                clipRule="evenodd"
-              />
-            </svg>
-            <span>One-shot editing</span>
+            <CheckIcon />
+            <span>Image + prompt input</span>
           </div>
           <div className="flex items-center gap-2">
-            <svg className="h-5 w-5 text-primary" fill="currentColor" viewBox="0 0 20 20">
-              <path
-                fillRule="evenodd"
-                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                clipRule="evenodd"
-              />
-            </svg>
-            <span>Multi-image support</span>
+            <CheckIcon />
+            <span>Output gallery</span>
           </div>
           <div className="flex items-center gap-2">
-            <svg className="h-5 w-5 text-primary" fill="currentColor" viewBox="0 0 20 20">
-              <path
-                fillRule="evenodd"
-                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                clipRule="evenodd"
-              />
-            </svg>
-            <span>Natural language</span>
+            <CheckIcon />
+            <span>Tiered model access</span>
           </div>
         </motion.div>
+
+        <motion.p
+          className="mt-8 text-xs text-muted-foreground"
+          initial={prefersReducedMotion ? {} : animations.fadeIn.initial}
+          animate={prefersReducedMotion ? {} : animations.fadeIn.animate}
+          transition={prefersReducedMotion ? {} : { delay: 0.8 }}
+        >
+          Independent product. Not affiliated with Google, Gemini, or OpenRouter.
+        </motion.p>
       </motion.div>
     </section>
+  )
+}
+
+function CheckIcon() {
+  return (
+    <svg className="h-5 w-5 text-primary" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+      <path
+        fillRule="evenodd"
+        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+        clipRule="evenodd"
+      />
+    </svg>
   )
 }
 
@@ -172,3 +158,4 @@ function BananaIcon({ className }: { className?: string }) {
     </svg>
   )
 }
+

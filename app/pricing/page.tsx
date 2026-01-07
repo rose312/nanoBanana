@@ -3,6 +3,7 @@ import { createSupabaseServerClient } from "@/lib/supabase/server"
 import { PricingPlans } from "@/components/pricing-plans"
 import { AuthButton } from "@/components/auth-button"
 import { ManageSubscriptionButton } from "@/components/manage-subscription-button"
+import { siteConfig } from "@/lib/site-config"
 
 export default async function PricingPage() {
   const supabase = await createSupabaseServerClient()
@@ -44,7 +45,21 @@ export default async function PricingPage() {
           <div>
             <h1 className="text-balance text-4xl font-bold tracking-tight sm:text-5xl">Pricing</h1>
             <p className="mt-3 max-w-2xl text-pretty text-muted-foreground">
-              Choose a plan for fast, high-quality image editing with Nano Banana.
+              Choose a plan. Different plans unlock different model tiers.
+            </p>
+            <p className="mt-3 max-w-2xl text-sm text-muted-foreground">
+              Support:{" "}
+              <a className="underline underline-offset-2 hover:text-foreground" href={`mailto:${siteConfig.supportEmail}`}>
+                {siteConfig.supportEmail}
+              </a>{" "}
+              ·{" "}
+              <Link className="underline underline-offset-2 hover:text-foreground" href="/terms">
+                Terms
+              </Link>{" "}
+              ·{" "}
+              <Link className="underline underline-offset-2 hover:text-foreground" href="/privacy">
+                Privacy
+              </Link>
             </p>
           </div>
           <div className="w-full sm:w-auto">
@@ -89,7 +104,11 @@ export default async function PricingPage() {
             <div>
               <p className="font-medium">Need help?</p>
               <p className="mt-1 text-sm text-muted-foreground">
-                Email support or return to the <Link href="/" className="underline">homepage</Link>.
+                Email{" "}
+                <a className="underline underline-offset-2" href={`mailto:${siteConfig.supportEmail}`}>
+                  {siteConfig.supportEmail}
+                </a>{" "}
+                or visit <Link href="/support" className="underline underline-offset-2">Support</Link>.
               </p>
             </div>
           </div>
