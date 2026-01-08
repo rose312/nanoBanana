@@ -1,12 +1,14 @@
-import { NextResponse } from "next/server"
-import { createSupabaseServerClient } from "@/lib/supabase/server"
+import { NextResponse, type NextRequest } from "next/server"
+import { createSupabaseRouteHandlerClient } from "@/lib/supabase/route-handler"
+import { getPublicOrigin, safeNextPath } from "@/lib/request-origin"
 
-export async function POST(req: Request) {
-  const url = new URL(req.url)
-  const next = url.searchParams.get("next") ?? "/"
+export async function POST(req: NextRequest) {
+  const next = safeNextPath(req.nextUrl.searchParams.get("next"))
+  const origin = getPublicOrigin(req)
 
-  const supabase = await createSupabaseServerClient()
-  await supabase.auth.signOut()
+  const res = NextResponse.redirect(new URL(next, origin), { status: 303 })
+  const supabase = createSupabaseRouteHandlerClient(req, res)
+  await supabase.auth.signOut().catch(() => null)
 
-  return NextResponse.redirect(new URL(next, url.origin), { status: 303 })
+  return res
 }
